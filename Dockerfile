@@ -1,5 +1,5 @@
 # === 階段 1: 建置前端 (Builder) ===
-FROM node:25-alpine as frontend-builder
+FROM node:25-alpine AS frontend-builder
 
 WORKDIR /app/frontend
 

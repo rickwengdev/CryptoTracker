@@ -1,12 +1,12 @@
 // ==========================================
 // Crypto Tracker Backend (Node.js + Express)
 // ==========================================
-
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
 const { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL } = require('@solana/web3.js');
 const path = require('path');
+const staticPath = path.join(process.cwd(), 'public');
 
 const app = express();
 app.use(cors());
@@ -210,10 +210,10 @@ app.post('/api/portfolio', async (req, res) => {
     }
 });
 
-app.get(/^.*/, (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+app.use(express.static(staticPath));
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.get(/^.*/, (req, res) => {
+    res.sendFile(path.join(staticPath, 'index.html'));
+});
 
 app.listen(PORT, '0.0.0.0', () => console.log(`Backend running on port ${PORT}`));
